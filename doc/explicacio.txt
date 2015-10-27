@@ -1,0 +1,152 @@
+ef = else if
+
+Colections
+Tokens	?	input
+q	queue	output
+s	stack	tmp
+
+t, o	element	tmp
+t	element token
+o	int
+
+====================
+==     program    ==
+====================
+
+basic:
+while Tokens			\" treball basic
+	t = Tokens.next
+	Colect IF
+while s				\" final
+	t = s.pop
+	if t = (	ERROR parentesis
+	q.add t
+
+====================
+
+Colect IF:
+if t = digit, variable		q.add t
+ef t = function			s.push t
+ef t = (			s.push t
+ef t = Argument Separator	AS
+ef t = Operator			O
+ef t = )			p)
+else				ERROR not understand -normal, compiler d'abans...-
+
+--------------------
+
+Argument Separator, realitat un pel inecessari.
+	Necessitem d'un parser per a transformar les coses amb tokens! que passi olimpicament dels separadors xD
+AS:
+while s
+	t = s.peek
+	if t = (	Return
+	q.add s.pop
+ERROR parentesis
+
+--------------------
+
+Operant
+	0: +, -	Right	Assosation
+	1: *, /	Right	Assosation
+	2: ^	Left	Assosation
+O:
+if s
+	o = s.peek
+	if o = Operator
+		if t = Right Assosation
+			if t < o
+				q.add s.pop
+		else	\" t = Left Assotation
+			if t ≤ o
+				q.add s.pop
+s.push t
+Return
+
+--------------------
+
+p):
+while s
+	t = s.pop
+	if t = ( break
+	q.add t
+t = s.peek
+if t = Function
+	q.add s.pop
+Return
+
+>>>>>>>>>>>>>>>>>>>>
+/-------- <tok> <--------\ <-----\ <----------------------------------\ <-\ <-\
+|      n    |y           |       |                                    |   |   |
+|           v            |       |                                    |   |   |
+|     [t = tok.next]     |       |                                    |   |   |
+|           |            |       |                                    |   |   |
+|           v    y       |       |                                    |   |   |
+|     <t.isDigit>----> [q.add t] |                                    |   |   |
+|           |n                   |                                    |   |   |
+|           v       y            |                                    |   |   |
+|     <t.isFuntion>----> [s.push t]                                   |   |   |
+|         |                ^                                          |   |   |
+|         v                |                                          |   |   |
+|     <t = (>--------------/                                          |   |   |
+|     |                                                               |   |   |
+|     v                     y      n                                  |   |   |
+|     <t.Argument Separator>-> /-> <s>-> ERROR, separator, parentesis |   |   |
+|             |                |   y|                                 |   |   |
+|             |                |    v                                 |   |   |
+|             |                | [t = s.peek]                         |   |   |
+|             |                |    |                                 |   |   |
+|             |                |    v   y                             |   |   |
+|             |                | <t = (>------------------------------/   |   |
+|             |                |    |                                     |   |
+|             |                |    v                                     |   |
+|             |                \-[q.add s.pop]                            |   |
+|     	v        y     n                                            |   |
+|          <t.Operator>-> <s>-----------------------------------> [s.push t]  |
+|            |             |y                                         ^       |
+|            |             v                                          |       |
+|            |           [o = s.peek]                                 |       |
+|            |             |                                          |       |
+|            |             v           n                              |       |
+|            |           <o.isOperator>-------------------------------/       |
+|            |             |y                                         ^       |
+|            |             v                                          |       |
+|            |           <t.isRightAssotation>                        |       |
+|            |            |y       |n                                 |       |
+|            |            v        v      n                           |       |
+|            |           <t < o>  <t ≤ o> ----------------------------/       |
+|            |            |y  n\---|y------/                                  |
+|            |            v        v       |                                  |
+|            |           [q.add s.pop]-----/                                  |
+|            |                                                                |
+|            v ")"  n                                                         |
+|           <s>---------------------------------------------------------------/
+|            |y  \--<--<-\                                                    ^
+|            v            \                                                   |
+|          [t = s.pop]     |                                                  |
+|           |              |                                                  |
+|           v     n        |                                                  |
+|         <t = (> --> [q.add t]                                               |
+|          |y                                                                 |
+|          v                                                                  |
+|        [t = s.peek]                                                         |
+|         |                                                                   |
+|         v        n                                                          |
+|       <t.Funtion>-----------------------------------------------------------/
+|        |y                                                                   ^
+|        v                                                                    |
+|      [q.add s.pop]----------------------------------------------------------/
+|
+v  n
+<s>--------> END ;)
+ |y \--<-\
+ |         \
+ v          |
+[t = s.pop] |
+ |          |
+ v     n    |
+<t = C>-----/
+ |y
+ v
+ERROR
+parentesis not close

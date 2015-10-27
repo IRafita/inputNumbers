@@ -1,0 +1,21 @@
+basic element
+struct
+	byte, or int 'depent de quin sigui mes facil de fer anar' type;
+	void * contener;
+	> type
+		digit / variable	00	00
+		Operator		01	40
+			1 Right assotation
+			0 Left assotation
+				5 bits restants per comparar :)
+		funtion / (		10	80
+			1 funtion
+			0 (
+		)			11	C0
+
+00 00 0000	0x00	Digit
+01 0x xxxx	0x40	Operador Left Assotetion
+01 1x xxxx	0x60	Operador Right Assotetion
+10 00 0000	0x80	(
+10 10 0000	0xA0	Funtion
+11 00 0000	0xC0	)

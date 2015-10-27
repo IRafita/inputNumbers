@@ -1,0 +1,22 @@
+- Voldria que se pogues 'debuggegar' en altes prestacions
+	> Possible utilitat, entendre com funciona
+	> Poder escriure en un fitxer el que fa
+		> us d'explicacio del que fa, debug, exemple
+	> fins i tot paral.lemament a les dades, que se pogues veure:
+		> flow de que esta passant
+		> pseudocodi de que esta passant
+
+- Voldria que fos flexible, i se pogues redefinir facilment les coses
+	> basicament poder canviar els operants, afegint, canviant i eliminant
+	> NO significa interpretar diferentment les funcions ni altres coses, nomes operants
+
+- Ara ja veig, que necessitare d'un parser per passar d'huma a Token
+
+- Per treure errors, la estructura elemental necessitaria del possisionament en lo escrit
+	> sembla ser que necessitare un parser de la queue (out) a una altra, un cop descobert que tot es correcte
+		Per a treure els 'punters' ja que no necessitarem corregir res mes ara per ara.
+		|| Segur??
+
+- Descobrir com emetre diferents missatges
+	> Error
+	> Correcte
